@@ -1,0 +1,272 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: #b5cad9;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+#home-container {
+    display: block;
+    background-color: #111;
+    width: 400px;
+    height: 400px;
+    box-shadow: 10px 10px 0px #7b8188;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border: 3px solid #dbdfe4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#home-container h2 {
+    color: #fff;
+    font-size: 34px;
+    margin: 10px 0;
+}
+
+#home-container .dialog-box {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+#home-container .dialog-box #new-user {
+    width: 100%;
+    height: 35px;
+    outline: none;
+    border: none;
+    padding: 0 15px;
+    border: 2px solid #dbdfe4;
+    box-shadow: 3px 3px 0px #545454;
+}
+
+#main-container #exit-btn,
+#home-container .dialog-box #join-btn {
+    width: 100px;
+    height: 35px;
+    margin: 10px 0;
+    color: #fff;
+    background-color: #3e3f40;
+    box-shadow: 3px 3px 0px #dbdfe4;
+    border: 2px solid #dbdfe4;
+    cursor: pointer;
+}
+
+#main-container #exit-btn:hover,
+#home-container .dialog-box #join-btn:hover {
+    color: #92969b;
+    cursor: pointer;
+    border: 2px solid #a6a6a6;
+}
+
+#home-container .dialog-box #need-help {
+    position: relative;
+    top: 50px;
+    align-self: flex-end;
+}
+
+#navbar{
+    display: flex;
+    justify-content: space-between;
+}
+
+#navbar h1{
+    display: flex;
+    align-items: center;
+}
+
+#home-container .dialog-box #need-help button {
+    color: #ff0055;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#home-container .dialog-box #need-help button:hover {
+    color: #a80b40;
+}
+
+#home-container .dialog-box #need-help-tips {
+    width: 300px;
+    background-color: #e6e5e5;
+    padding: 25px;
+    position: absolute;
+    top: 50px;
+    right: -210px;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+    display: none;
+}
+
+#home-container .dialog-box #need-help-tips #need-help-tips-btn {
+    width: 25px;
+    height: 25px;
+    background-color: #d81515;
+    border: 2px solid #808080;
+    margin-bottom: 20px;
+    cursor: pointer;
+    position: relative;
+    align-self: flex-end;
+}
+
+.main-container {
+    width: 70%;
+    margin: 0 auto;
+    height: calc(100vh - 50px);
+}
+
+#main-container {
+    display: none;
+}
+
+.main-container h1 {
+    color: #fff;
+    font-size: 30px;
+}
+
+.container {
+    height: calc(100vh - 200px);
+    background-color: #111;
+    padding: 50px;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 10px 10px 0px #dbdfe4;
+}
+
+.message {
+    width: 75%;
+    background-color: #dcdcdc;
+    padding: 8px 20px;
+    border-radius: 10px;
+    margin-top: 3px;
+}
+
+.left {
+    align-self: flex-start;
+    width: fit-content;
+}
+
+.left-part {
+    max-width: 75%;
+}
+
+.right {
+    align-self: flex-end;
+    width: fit-content;
+}
+
+.right-part {
+    max-width: 75%;
+}
+
+.right-part .user-name {
+    padding: 0;
+}
+
+#send-container {
+    width: 100%;
+    display: flex;
+    box-shadow: 10px 10px 0px #dbdfe4;
+}
+
+#send-container #send-btn-icon {
+    height: 32px;
+    width: 35px;
+}
+
+.container::-webkit-scrollbar {
+    display: none;
+}
+
+#messageInp {
+    width: 80%;
+    height: 55px;
+    padding: 0 50px;
+    outline: none;
+    font-size: 18px;
+    border: 2px solid #dbdfe4;
+    box-shadow: 3px 3px 20px #545454;
+}
+
+.user-name {
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+/* https://pngtree.com/freepng/send-symbol-paper-airplane-icon-blue_7964318.html */
+#send-container button {
+    width: 25%;
+    height: 55px;
+    color: #fff;
+    border: none;
+    position: relative;
+    cursor: pointer;
+    background-color: #3e3f40;
+    box-shadow: 3px 3px 20px #545454;
+}
+
+#send-container button:hover {
+    color: #c7cacc;
+    cursor: pointer;
+    border: 2px solid #a6a6a6;
+    background-color: #2f2f2f;
+}
+
+.new-user-notification {
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom: 0px;
+    background-color: #484545;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 15px;
+    border-radius: 5px;
+}
+
+/* TABLET */
+@media only screen and (max-width: 1000px) {
+    .container {
+        padding: 30px 20px;
+        height: calc(100vh - 150px);
+    }
+
+    .main-container {
+        width: 80%;
+    }
+}
+
+/* MOBILE */
+@media only screen and (max-width: 500px) {
+    .container {
+        padding: 15px 10px;
+    }
+
+    .main-container {
+        width: 95%;
+    }
+
+    #home-container {
+        width: 300px;
+        height: 300px;
+    }
+
+    #home-container .dialog-box #need-help {
+        top: 0px;
+    }
+
+    #home-container .dialog-box #need-help-tips {
+        top: 0px;
+        right: 0px;
+    }
+}
