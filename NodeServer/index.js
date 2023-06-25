@@ -2,13 +2,18 @@
 
 const server = require('https').createServer();
 
-const io = require('socket.io')(server, {
+const io = require('socket.io')(server.address().port, {
     cors: {
         origin: 'https://mychatroom.vercel.app',
         methods: ['GET', 'POST'],
         allowedHeaders: ['Content-Type'],
         credentials: true,
     },
+});
+
+server.listen(0, () => {
+    const port = server.address().port;
+    console.log(`Server listening on port ${port}`);
 });
 
 const users = {};
@@ -32,3 +37,4 @@ io.on('connection', socket => {
         delete users[socket.id];
     })
 });
+
