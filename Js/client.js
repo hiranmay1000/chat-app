@@ -1,5 +1,5 @@
-const socket = io('https://cdn.socket.io/4.3.2/socket.io.min.js');
-// const socket = io("https://mychatroom.vercel.app");
+// const socket = io('https://cdn.socket.io/4.3.2/socket.io.min.js');
+const socket = io("https://mychatroom.vercel.app");
 
 const displayProfileName = document.getElementById('display-profile-name');
 const form = document.getElementById('send-container');
