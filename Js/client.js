@@ -1,5 +1,5 @@
-// const socket = io("https://mychatroom.vercel.app");
-const socket = io("https://mychatroom.vercel.app");
+// const socket = io("http://localhost:8000");
+const socket = io("https://mychatroom.vercel.app:8000");
 
 const displayProfileName = document.getElementById('display-profile-name');
 const form = document.getElementById('send-container');
