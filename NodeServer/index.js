@@ -1,15 +1,35 @@
 // Node server - Handle socket.io connection
 
-const server = require('https').createServer();
+// const server = require('https').createServer();
 
-const io = require('socket.io')(server.address().port, {
-    cors: {
-        origin: 'https://mychatroom.vercel.app',
-        methods: ['GET', 'POST'],
-        allowedHeaders: ['Content-Type'],
-        credentials: true,
-    },
+// const io = require('socket.io')(server.address().port, {
+//     cors: {
+//         origin: 'https://mychatroom.vercel.app',
+//         methods: ['GET', 'POST'],
+//         allowedHeaders: ['Content-Type'],
+//         credentials: true,
+//     },
+// });
+
+
+const https = require('https');
+const io = require('socket.io')(https.createServer());
+
+const server = https.createServer((req, res) => {
+  // Handle any HTTPS requests if needed
 });
+
+io.attach(server, {
+  cors: {
+    origin: 'https://mychatroom.vercel.app',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+  },
+});
+
+
+
 
 server.listen(0, () => {
     const port = server.address().port;
