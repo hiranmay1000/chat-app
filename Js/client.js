@@ -1,4 +1,4 @@
-const socket = io("https://mychatroom.vercel.app");
+const socket = io("https://mychatroom.vercel.app/socket.io");
 const displayProfileName = document.getElementById('display-profile-name');
 const form = document.getElementById('send-container');
 const messageInp = document.getElementById("messageInp");
@@ -164,7 +164,7 @@ joinBtn.addEventListener('click', () => {
         });
         homeContainer.style.display = "none";
         mainContainer.style.display = "block";
-        console.log("hell");
+        console.log(uname, " is joined");
     }
 })
 
