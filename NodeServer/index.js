@@ -15,9 +15,7 @@
 const https = require('https');
 const io = require('socket.io')(https.createServer());
 
-const server = https.createServer((req, res) => {
-  // Handle any HTTPS requests if needed
-});
+const server = https.createServer();
 
 io.attach(server, {
   cors: {
