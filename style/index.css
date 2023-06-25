@@ -57,6 +57,7 @@ html {
     box-shadow: 3px 3px 0px #dbdfe4;
     border: 2px solid #dbdfe4;
     cursor: pointer;
+    transition: .5s ease-in;
 }
 
 #main-container #exit-btn:hover,
@@ -64,6 +65,9 @@ html {
     color: #92969b;
     cursor: pointer;
     border: 2px solid #a6a6a6;
+    box-shadow: -3px -3px 0px #dbdfe4;
+    transition: .5s ease-out;
+
 }
 
 #home-container .dialog-box #need-help {
@@ -98,7 +102,7 @@ html {
     background-color: #e6e5e5;
     padding: 25px;
     position: absolute;
-    top: 50px;
+    top: -20px;
     right: -210px;
     display: flex;
     flex-direction: column;
