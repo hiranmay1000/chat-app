@@ -1,5 +1,5 @@
 // Node server - Handle socket.io connection
-const server = require('https').createServer();
+const server = require('http').createServer();
 const io = require('socket.io')(server, {
     cors: {
         origin: 'https://mychatroom.vercel.app',
