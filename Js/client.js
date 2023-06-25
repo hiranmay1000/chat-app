@@ -1,4 +1,6 @@
-const socket = io("https://mychatroom.vercel.app");
+const socket = io('https://cdn.socket.io/4.3.2/socket.io.min.js');
+// const socket = io("https://mychatroom.vercel.app");
+
 const displayProfileName = document.getElementById('display-profile-name');
 const form = document.getElementById('send-container');
 const messageInp = document.getElementById("messageInp");
@@ -12,7 +14,6 @@ const needHelpTipsPage = document.getElementById('need-help-tips');
 const needHelpTipsCancelBtn = document.getElementById('need-help-tips-btn');
 const exitBtn = document.getElementById('exit-btn');
 const roomLink = document.getElementById('room-link');
-
 
 
 
@@ -35,6 +36,7 @@ needHelpTipsCancelBtn.addEventListener('click', () => {
 
 exitBtn.addEventListener('click', () => {
     socket.disconnect();
+    console.log("Current user exited");
     mainContainer.style.display = 'none';
     homeContainer.style.display = 'block';
     location.reload();
@@ -164,7 +166,7 @@ joinBtn.addEventListener('click', () => {
         });
         homeContainer.style.display = "none";
         mainContainer.style.display = "block";
-        console.log(uname, " is joined");
+        console.log(uname, "is joined");
     }
 })
 

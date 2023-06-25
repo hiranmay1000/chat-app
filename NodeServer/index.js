@@ -1,6 +1,15 @@
 // Node server - Handle socket.io connection
-const server = require('https').createServer();
-const io = require('socket.io')(server)
+
+const server = http.createServer();
+const io = require('socket.io')(server, {
+    cors: {
+        origin: 'https://mychatroom.vercel.app',
+        methods: ['GET', 'POST'],
+        allowedHeaders: ['Content-Type'],
+        credentials: true,
+    },
+});
+
 const users = {};
 
 
@@ -21,4 +30,8 @@ io.on('connection', socket => {
         socket.broadcast.emit('leave', users[socket.id]);
         delete users[socket.id];
     })
+});
+
+server.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
