@@ -1,5 +1,5 @@
 // const socket = io("http://localhost:8000");
-const socket = io(`https://mychatroom.vercel.app:${server.address().port}`);
+const socket = io("https://mychatroom.vercel.app");
 
 const displayProfileName = document.getElementById('display-profile-name');
 const form = document.getElementById('send-container');
@@ -165,7 +165,7 @@ joinBtn.addEventListener('click', () => {
             append(`${uname} joined the chat`);
         });
         homeContainer.style.display = "none";
-        mainContainer.style.display = "block";
+        mainContainer.style.display = "flex";
         console.log(uname, "is joined");
     }
 })

@@ -10,16 +10,19 @@ html {
 }
 
 #home-container {
-    display: block;
-    background-color: #111;
     width: 400px;
     height: 400px;
-    box-shadow: 10px 10px 0px #7b8188;
+    padding: 15px;
+
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    border: 3px solid #dbdfe4;
+
+    box-shadow: 10px 10px 0px #7b8188;
+    border: 15px solid #dbdfe4;
+    background-color: #111;
+
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,7 +30,7 @@ html {
 
 #home-container h2 {
     color: #fff;
-    font-size: 34px;
+    font-size: 35px;
     margin: 10px 0;
 }
 
@@ -57,7 +60,7 @@ html {
     box-shadow: 3px 3px 0px #dbdfe4;
     border: 2px solid #dbdfe4;
     cursor: pointer;
-    transition: .5s ease-in;
+    transition: 0.5s ease-in;
 }
 
 #main-container #exit-btn:hover,
@@ -66,8 +69,7 @@ html {
     cursor: pointer;
     border: 2px solid #a6a6a6;
     box-shadow: -3px -3px 0px #dbdfe4;
-    transition: .5s ease-out;
-
+    transition: 0.5s ease-out;
 }
 
 #home-container .dialog-box #need-help {
@@ -76,12 +78,12 @@ html {
     align-self: flex-end;
 }
 
-#navbar{
+#navbar {
     display: flex;
     justify-content: space-between;
 }
 
-#navbar h1{
+#navbar h1 {
     display: flex;
     align-items: center;
 }
@@ -125,10 +127,8 @@ html {
     width: 70%;
     margin: 0 auto;
     height: calc(100vh - 50px);
-}
-
-#main-container {
     display: none;
+    flex-direction: column;
 }
 
 .main-container h1 {
@@ -137,21 +137,29 @@ html {
 }
 
 .container {
-    height: calc(100vh - 200px);
-    background-color: #111;
+    height: calc(100vh - 150px);
     padding: 50px;
-    overflow-y: scroll;
+    padding-bottom: 100px;
+
+    background-color: #111;
+    border: 10px solid #dbdfe4;
+    box-shadow: 10px 10px 0px #434345;
+
+    overflow-y: scroll !important;
+
     display: flex;
     flex-direction: column;
-    box-shadow: 10px 10px 0px #dbdfe4;
+
+    position: relative;
 }
 
 .message {
     width: 75%;
-    background-color: #dcdcdc;
     padding: 8px 20px;
     border-radius: 10px;
     margin-top: 3px;
+
+    background-color: #dcdcdc;
 }
 
 .left {
@@ -177,9 +185,14 @@ html {
 }
 
 #send-container {
-    width: 100%;
+    width: 65%;
     display: flex;
-    box-shadow: 10px 10px 0px #dbdfe4;
+    box-shadow: 5px 5px 0px #434345;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 560%);
 }
 
 #send-container #send-btn-icon {
@@ -215,7 +228,6 @@ html {
     position: relative;
     cursor: pointer;
     background-color: #3e3f40;
-    box-shadow: 3px 3px 20px #545454;
 }
 
 #send-container button:hover {
@@ -242,17 +254,22 @@ html {
 @media only screen and (max-width: 1000px) {
     .container {
         padding: 30px 20px;
-        height: calc(100vh - 150px);
     }
 
     .main-container {
         width: 80%;
+    }
+
+    #home-container .dialog-box #need-help-tips {
+        top: -5px;
+        right: -55px;
     }
 }
 
 /* MOBILE */
 @media only screen and (max-width: 500px) {
     .container {
+        height: 100vh;
         padding: 15px 10px;
     }
 
@@ -270,7 +287,13 @@ html {
     }
 
     #home-container .dialog-box #need-help-tips {
-        top: 0px;
-        right: 0px;
+        top: -23px;
+        right: -15px;
+    }
+
+    #send-container {
+        width: 83%;
     }
 }
+
+/* TEMP - TEST */
