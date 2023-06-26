@@ -28,8 +28,8 @@ server.listen(port, () => {
 
 const io = require('socket.io')(server, {
     cors: {
-        // origin: 'https://mychatroom.vercel.app', // Replace with your deployed app's URL
-        origin: 'http://127.0.0.1:5500',
+        origin: 'https://mychatroom.vercel.app', // Replace with your deployed app's URL
+        // origin: 'http://127.0.0.1:5500',
         methods: ['GET', 'POST'],
         allowedHeaders: ['Content-Type'],
         credentials: true,
