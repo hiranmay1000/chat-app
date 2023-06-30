@@ -12,79 +12,131 @@
             referrerpolicy="no-referrer"
         ></script>
         <script defer src="/Js/client.js"></script>
+        <script defer src="/Js/utility.js"></script>
+        <script defer src="/Js/online-users-list.js"></script>
         <link rel="stylesheet" href="/style/index.css" />
         <link rel="icon" />
     </head>
     <body>
-        <div class="home-container active" id="home-container">
-            <div class="dialog-box">
-                <h2>Join Chatroom</h2>
-                <input
-                    type="text"
-                    name="new-user"
-                    id="new-user"
-                    placeholder="username"
-                    required
-                />
-                <button type="submit" id="join-btn">JOIN</button>
-                <div id="need-help">
-                    <button type="submit" id="need-help-btn">Need Help?</button>
-                </div>
-
-                <div id="need-help-tips">
-                    <button id="need-help-tips-btn">X</button>
-                    <div class="need-help-box">
-                        <p>Step 1: Enter a username of your choice</p>
-                        <br />
-                        <p>
-                            Step 2: Click the join button to enter into the
-                            chatroom
-                        </p>
-                        <br />
-                        <p>
-                            Note: Other users may already present in the rooml
-                        </p>
-                        <br />
-                        <p>
-                            Disclaimer: Do not share any sensitive information.
-                        </p>
+        <div class="master-container">
+            <div class="home-container active" id="home-container">
+                <div class="dialog-box">
+                    <h2>Join Chatroom</h2>
+                    <input
+                        type="text"
+                        name="new-user"
+                        id="new-user"
+                        placeholder="username"
+                        required
+                    />
+                    <button type="submit" id="join-btn">JOIN</button>
+                    <div id="need-help">
+                        <button type="submit" id="need-help-btn">Need Help?</button>
+                    </div>
+    
+                    <div id="need-help-tips">
+                        <button id="need-help-tips-btn">X</button>
+                        <div class="need-help-box">
+                            <p>Step 1: Enter a username of your choice</p>
+                            <br />
+                            <p>
+                                Step 2: Click the join button to enter into the
+                                chatroom
+                            </p>
+                            <br />
+                            <p>
+                                Note: Other users may already present in the rooml
+                            </p>
+                            <br />
+                            <p>
+                                Disclaimer: Do not share any sensitive information.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="chatroom-info" style="display: none">
-            <h2>Chatroom</h2>
-            <p>Shareable Link:</p>
-            <input type="text" id="room-link" readonly />
-        </div>
-
-        <!-- Chatroom -->
-        <div class="main-container" id="main-container">
-            <nav id="navbar">
-                <h1 id="display-profile-name">Chat Room</h1>
-                <button type="submit" id="exit-btn">EXIT</button>
-            </nav>
-            <div class="container">
-                <!-- <div class="message left left-part">
-                        
-                    </div> -->
-                <div class="send">
-                    <form action="#" id="send-container">
-                        <input
-                            type="text"
-                            name="messageInp"
-                            id="messageInp"
-                            placeholder="Text message..."
-                            required
+            <div class="chatroom-info" style="display: none">
+                <h2>Chatroom</h2>
+                <p>Shareable Link:</p>
+                <input type="text" id="room-link" readonly />
+            </div>
+    
+            <!-- Chatroom -->
+            <div class="chat-container">
+                <div class="connected-users-box" id="connected-users-box">
+                    <p class="active-users">
+                        Active users
+                        <img
+                            src="/Assets/Icons/online-green-icon.png"
+                            alt=""
+                            srcset=""
                         />
-                        <button type="submit" id="send-btn">
-                            <!-- <img
-                                src="/Assets/Icons/send-btn.png"
-                                alt="send-button"
-                                id="send-btn-icon"
-                            /> -->Send
-                        </button>
-                    </form>
+                    </p>
+                    <div class="connected-users-dialog">
+                        <!-- <div class="connected-users-card">
+                            <h2 class="connected-users-avatar">H</h2>
+                            <h4 class="connected-users-username">Hiranmay</h4>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="main-container" id="main-container">
+                    <nav id="navbar">
+                        <h1 id="display-profile-name">Unknown</h1>
+                        <button type="submit" id="exit-btn">LEAVE</button>
+                    </nav>
+                    <div class="chat-box-container">
+                        <div class="container">
+                            <!-- <div class="message left left-part">
+                                    
+                            </div> -->
+                        </div>
+                        <div class="send">
+                            <form action="#" id="send-container">
+                                <input
+                                    type="text"
+                                    name="messageInp"
+                                    id="messageInp"
+                                    placeholder="Text message..."
+                                    required
+                                />
+                                <button type="submit" id="send-btn">
+                                    <img
+                                        src="/Assets/Icons/send-btn.png"
+                                        alt="send-button"
+                                        id="send-btn-icon"
+                                    />
+                                    <a href="#show-updated-message"></a>
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="room-container-box" id="room-container-box">
+                    <div class="sound-alert-box" id="sound-alert-box">
+                        <div class="alert-logo" id="alert-unmute">
+                            <img
+                                src="/Assets/Icons/alert-speaker.gif"
+                                alt=""
+                                srcset=""
+                            />
+                        </div>
+                        <div class="alert-logo" id="alert-mute">
+                            <img
+                                src="/Assets/Icons/alert-speaker-mute.gif"
+                                alt=""
+                                srcset=""
+                            />
+                        </div>
+                    </div>
+                    <p class="your-rooms">Your rooms</p>
+                    <div class="room-dialog-box">
+                        <div class="room-card" title="click to copy">
+                            <h5>DSAF54</h5>
+                        </div>
+                        <div class="room-card">
+                            <h5>DSAF54</h5>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

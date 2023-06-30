@@ -1,19 +1,141 @@
-// const socket = io("http://localhost:8000");
-const socket = io("https://mychatroom.vercel.app");
+const socket = io("http://localhost:8000");
+// const socket = io("https://mychatroom.vercel.app");
 
 const displayProfileName = document.getElementById('display-profile-name');
-const form = document.getElementById('send-container');
 const messageInp = document.getElementById("messageInp");
 const messageContainer = document.querySelector(".container");
 const newUser = document.getElementById('new-user');
-const joinBtn = document.getElementById('join-btn');
 const homeContainer = document.getElementById('home-container');
 const mainContainer = document.getElementById('main-container');
-const needHelpBtn = document.getElementById('need-help-btn');
 const needHelpTipsPage = document.getElementById('need-help-tips');
-const needHelpTipsCancelBtn = document.getElementById('need-help-tips-btn');
+const connnectedUserBox = document.getElementById('connected-users-box');
+const ConnectedUserCard = document.getElementById('connected-users-card')
+const roomContainerBox = document.getElementById('room-container-box')
+const soundAlertBox = document.getElementById('sound-alert-box')
+const alertUnmute = document.getElementById('alert-unmute')
+const alertMute = document.getElementById('alert-mute')
+
+const form = document.getElementById('send-container');
+const joinBtn = document.getElementById('join-btn');
 const exitBtn = document.getElementById('exit-btn');
-const roomLink = document.getElementById('room-link');
+const needHelpBtn = document.getElementById('need-help-btn');
+const needHelpTipsCancelBtn = document.getElementById('need-help-tips-btn');
+
+
+
+
+let receiverSound = new Audio();
+receiverSound.src = './Assets/ringtones/message-received-elegant.mp3';
+
+let senderSound = new Audio();
+senderSound.src = './Assets/ringtones/message-sent-iphone.mp3';
+
+let isToggled = false;
+soundAlertBox.addEventListener('click', () => {
+    isToggled = !isToggled;
+    if (isToggled) {
+        alertUnmute.style.display = 'none';
+        alertMute.style.display = 'block';
+
+        receiverSound = null;
+        senderSound = null;
+
+    } else {
+        alertUnmute.style.display = 'block';
+        alertMute.style.display = 'none';
+
+        if (senderSound) {
+            senderSound.play();
+        }
+
+        receiverSound = new Audio();
+        receiverSound.src = './Assets/ringtones/message-received-elegant.mp3';
+
+        senderSound = new Audio();
+        senderSound.src = './Assets/ringtones/message-sent-iphone.mp3';
+    }
+})
+
+
+// Check if the user has already joined the chat
+const hasJoinedChat = localStorage.getItem('hasJoinedChat');
+
+if (hasJoinedChat) {
+    // User has already joined, show the chat interface directly
+    homeContainer.style.display = 'none';
+    mainContainer.style.display = 'flex';
+    connnectedUserBox.style.display = 'flex';
+    roomContainerBox.style.display = 'flex';
+
+    // Parse the stored JSON data
+    const userData = JSON.parse(hasJoinedChat);
+
+    // Extract the username from the parsed data
+    const username = userData.username;
+
+    // Emit a "new-user-joined" event to inform others about reconnection
+    socket.emit('new-user-joined', username);
+}
+
+
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const message = messageInp.value.trimStart();
+    if (validateSentence(message) && message !== "") {
+        socket.emit('chat', message);
+        appendMessageForSender("", message, 'right', prevSender);
+
+        if (senderSound !== null) {
+            senderSound.play();
+        }
+    }
+    messageInp.value = "";
+})
+
+
+
+exitBtn.addEventListener('click', () => {
+    socket.disconnect();
+    console.log("Current user exited");
+
+    sessionStorage.removeItem('hasJoinedChat');
+
+    mainContainer.style.display = 'none';
+    homeContainer.style.display = 'block';
+    connnectedUserBox.style.display = 'flex';
+    roomContainerBox.style.display = 'flex';
+
+    location.reload();
+})
+
+
+
+
+joinBtn.addEventListener('click', () => {
+    const uname = newUser.value.trim();
+    displayProfileName.textContent = uname;
+
+    if (uname !== "") {
+        socket.emit('new-user-joined', uname);
+
+        socket.on('user-joined', (uname, users) => {
+            append(`${uname} joined the chat`);
+        });
+
+
+        // Store the flag indicating the user has joined the chat
+        sessionStorage.setItem('hasJoinedChat', true);
+
+
+        homeContainer.style.display = "none";
+        mainContainer.style.display = "flex";
+        connnectedUserBox.style.display = 'flex';
+        roomContainerBox.style.display = 'flex';
+
+        console.log(uname, "is joined");
+    }
+})
 
 
 
@@ -34,13 +156,6 @@ needHelpTipsCancelBtn.addEventListener('click', () => {
     isOpenTipsPage = true;
 })
 
-exitBtn.addEventListener('click', () => {
-    socket.disconnect();
-    console.log("Current user exited");
-    mainContainer.style.display = 'none';
-    homeContainer.style.display = 'block';
-    location.reload();
-})
 
 
 const append = (message) => {
@@ -50,34 +165,7 @@ const append = (message) => {
     messageContainer.appendChild(newUserAlert);
 }
 
-let validateSentence = (message) => {
-    var cnt = 0;
-    for (let i = 0; i < message.length; i++) {
-        if (message[i] == ' ') {
-            cnt++;
-        }
-    }
 
-    if (message.length === cnt) {
-        return false;
-    }
-
-    return true;
-}
-
-function getDarkRandomColor() {
-    const minComponent = 10; // Minimum value for a color component
-
-    let r, g, b;
-
-    // Generate random values for the color components within the lower range
-    r = Math.floor(Math.random() * (255 - minComponent) + minComponent);
-    g = Math.floor(Math.random() * (255 - minComponent) + minComponent);
-    b = Math.floor(Math.random() * (255 - minComponent) + minComponent);
-
-    const color = `rgb(${r}, ${g}, ${b})`; // Combine components to create RGB color
-    return color;
-}
 
 let prevSender = "";
 let sender = false;
@@ -101,6 +189,7 @@ const appendMessageForReciever = (username, message, position, currentSender) =>
 
     messageHolderDiv.appendChild(messageDiv);
     messageHolderDiv.classList.add("message", position, `${position}-part`);
+
     if (currentSender !== prevSender && messageHolderDiv !== null) {
         messageHolderDiv.style.marginTop = "30px";
     }
@@ -142,37 +231,13 @@ const appendMessageForSender = (username, message, position, currentSender) => {
 };
 
 
-
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const message = messageInp.value.trimStart();
-    if (validateSentence(message) && message !== "") {
-        socket.emit('chat', message);
-        appendMessageForSender("", message, 'right', prevSender);
-    }
-    messageInp.value = "";
-})
-
-
-joinBtn.addEventListener('click', () => {
-    const uname = newUser.value.trim();
-    displayProfileName.textContent = uname;
-
-    if (uname !== "") {
-        socket.emit('new-user-joined', uname);
-
-        socket.on('user-joined', uname => {
-            append(`${uname} joined the chat`);
-        });
-        homeContainer.style.display = "none";
-        mainContainer.style.display = "flex";
-        console.log(uname, "is joined");
-    }
-})
-
-
 socket.on('receive', data => {
+    if (receiverSound !== null) {
+        receiverSound.play();
+    }
+    console.log(data.mess);
     appendMessageForReciever(`${data.userName}\n`, `${data.mess}\n`, 'left', `${data.userID}`);
+
 })
 
 socket.on('leave', (userName) => {
